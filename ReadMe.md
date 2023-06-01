@@ -8,7 +8,7 @@ Spacebar resets the view, left mouse click to center the view, scroll to zoom in
 
 ## Screenshot
 
-![image](image.png)
+![image](image2.png)
 
 ## Compiling from source
 
