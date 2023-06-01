@@ -5,3 +5,6 @@ Simple Mandelbrot set visualization using SFML and GLSL. Using a fragment shader
 ## Usage
 
 Spacebar resets the view, left mouse click to center the view, scroll to zoom in and out.
+
+## Screenshot
+![image](image.png)
