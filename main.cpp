@@ -30,6 +30,16 @@ int main(int argc, char *argv[])
     float x_max = 2.0f;
     float y_min = -2.0f;
     float y_max = 2.0f;
+    int color = 0;
+
+    sf::Text text;
+    sf::Font font;
+    font.loadFromFile("./arial.ttf");
+    if (!font.loadFromFile("arial.ttf"))
+    {
+        printf("Failed to load font\n");
+    }
+    text.setFont(font);
 
     auto clock = sf::Clock();
 
@@ -94,6 +104,15 @@ int main(int argc, char *argv[])
                     y_max = 2.0f;
                     y_min = -2.0f;
                 }
+
+                if (event.key.code == sf::Keyboard::C)
+                {
+                    color++;
+                    if (color > 1)
+                    {
+                        color = 0;
+                    }
+                }
             }
             else if (event.type = sf::Event::MouseWheelScrolled)
             {
@@ -129,9 +148,16 @@ int main(int argc, char *argv[])
         shader.setUniform("u_xmin", x_min);
         shader.setUniform("u_ymax", y_max);
         shader.setUniform("u_ymin", y_min);
+        shader.setUniform("u_color", color);
+
+        text.setString("Zoom: " + std::to_string(2.0f / (x_max - x_min)) + " color: " + std::to_string(color));
+        text.setCharacterSize(24);
+        text.setFillColor(sf::Color::Red);
+        text.setStyle(sf::Text::Regular);
 
         window.clear();
         window.draw(shape, &shader);
+        window.draw(text);
         window.display();
     }
 }

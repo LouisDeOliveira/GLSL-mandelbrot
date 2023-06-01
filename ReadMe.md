@@ -4,9 +4,10 @@ Simple Mandelbrot set visualization using SFML and GLSL. Using a fragment shader
 
 ## Usage
 
-Spacebar resets the view, left mouse click to center the view, scroll to zoom in and out.
+Spacebar resets the view, left mouse click to center the view, scroll to zoom in and out. Press "c" to change the color scheme.
 
 ## Screenshot
+
 ![image](image.png)
 
 ## Compiling from source

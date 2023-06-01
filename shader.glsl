@@ -6,8 +6,9 @@ uniform float u_xmax;
 uniform float u_xmin;
 uniform float u_ymax;
 uniform float u_ymin;
+uniform int u_color;
 uniform vec2 u_resolution;
-int N = 10000;
+int N = 1000;
 float radius = 0.05;
 
 vec3 bernsteinRBG(float t) {
@@ -18,9 +19,9 @@ vec3 bernsteinRBG(float t) {
 
 vec3 altRGB(int t){
 	return vec3(
-		0.5f * sin(0.1f * (float)t) + 0.5f,
-		0.5f * sin(0.1f * (float)t + 2.094f) + 0.5f,
-		0.5f * sin(0.1f * (float)t + 4.188f) + 0.5f
+		0.5 * sin(0.1 * (float)t) + 0.5,
+		0.5 * sin(0.1 * (float)t + 2.094) + 0.5,
+		0.5 * sin(0.1 * (float)t + 4.188) + 0.5
 	)
 ;}
 
@@ -41,7 +42,14 @@ vec2 computeCenter(vec2 uv){
 	return center;
 }
 
-
+vec3 get_color(int it, int u_color){
+	if (u_color == 0){
+		return bernsteinRBG(float(it) / float(N));
+	}
+	else{
+		return altRGB(it);
+	}
+}
 
 
 void main( void ) {	
@@ -51,11 +59,13 @@ void main( void ) {
 	//normalized mouse coordinates (from 0 to 1)
 
 	//compute the center of the image and compute the mandelbrot set
-	int it = mandelbrot(computeCenter(uv));
+	vec2 p = computeCenter(uv);
+	float zoom = (u_xmax - u_xmin) / 2.0;
+	vec2 dc = uv*zoom;
+	int it = mandelbrot(p);
+	vec3 color;
+	color = get_color(it, u_color);
 
-	vec3 color = altRGB(it);
-
-
-	gl_FragColor = vec4( color, 1.0);
+	gl_FragColor = vec4(color, 1.0);
 	
 }
