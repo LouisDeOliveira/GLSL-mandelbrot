@@ -24,7 +24,7 @@ sf::Vector2f worldPosition(sf::Vector2f convertedPos, float x_min, float x_max, 
 
 int main(int argc, char *argv[])
 {
-    sf::RenderWindow window(sf::VideoMode(600, 600), "Mandelbrot");
+    sf::RenderWindow window(sf::VideoMode(800, 800), "Mandelbrot");
     window.setFramerateLimit(144);
     float x_min = -2.0f;
     float x_max = 2.0f;
